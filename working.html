@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <!-- script src="http://amp.azure.net/libs/amp/1.8.1/azuremediaplayer.min.js" ></script -->
+    <!-- script src="http://amp.azure.net/libs/amp/latest/azuremediaplayer.min.js" ></script -->
     <script src="http://rawgit.com/mozilla/vtt.js/master/dist/vtt.js"></script>
 
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
@@ -41,7 +41,7 @@
                 debugger;
                 parser.parse(transcript);
             } catch (e) {
-                bodyElement.append('<span><p>EXCEPTION on firefox ver 50 and above</p></span><br/>');
+                bodyElement.append('<span><p>EXCEPTION on firefox ver 50+ and recent version of chrome</p></span><br/>');
                 bodyElement.append('<span><p>error From File: ' + e.fileName + '</p></span><br/>');
                 bodyElement.append('<span><p>errorMessage: ' + e.message + '</p></span><br/>');
                 return;
