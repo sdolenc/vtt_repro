@@ -1,6 +1,5 @@
 {
   "name": "vtt_repro",
-  "version": "6.2.5",
   "dependencies": {
     "videojs-vtt.js": "0.12.4"
   }
