@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="node_modules/videojs-vtt.js/lib/vttcue.js"></script>
+    <script src="http://amp.azure.net/libs/amp/latest/azuremediaplayer.min.js" ></script>
+    <!-- script src="http://rawgit.com/mozilla/vtt.js/master/dist/vtt.js"></script -->
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+
+    <script>
+        var transcript_cues,
+            xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'http://amssamples.streaming.mediaservices.windows.net/bc57e088-27ec-44e0-ac20-a85ccbcd50da/TOS-en.vtt');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                transcript_cues = initTranscript(xhr.responseText);
+            }
+        };
+        xhr.send();
+
+        function initTranscript(transcript) {
+            var parser = new WebVTT.Parser(window, WebVTT.StringDecoder());
+
+            var cues = [];
+            var regions = [];
+
+            parser.oncue = function(cue) {
+                cues.push(cue);
+            };
+            parser.onregion = function(region) {
+                regions.push(region);
+            }
+            parser.onparsingerror = function(error) {
+                console.log(error);
+            }
+
+            bodyElement = $('body');
+            try {
+                debugger;
+                parser.parse(transcript);
+            } catch (e) {
+                bodyElement.append('<span><p>EXCEPTION on firefox ver 50+ and recent version of chrome</p></span><br/>');
+                bodyElement.append('<span><p>error From File: ' + e.fileName + '</p></span><br/>');
+                bodyElement.append('<span><p>errorMessage: ' + e.message + '</p></span><br/>');
+                return;
+            }
+
+            bodyElement.append('<span><p>Success with no exception!</p></span><br/>');
+        }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
